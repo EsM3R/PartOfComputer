@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>anakart sayfası</h1>
+<div>
+
+
+{% for id, item in anakartlar.items %}
+    
+        <div class="card" style="width: 18rem; float: left; margin: 2%;">
+            <img src={{ item.image_url }} alt={{ name }} width="250" height="250" class="card-img-top" alt={{ name }}>
+            <div class="card-body">
+            <h5 class="card-title">{{ item.price }} TL</h5>
+            <p class="card-text">{{ item.name }}</p>
+            <a href="#" class="btn btn-primary">Ekle</a>
+            </div>
+            
+        </div>
+   
+
+<!--
+
+
+    <div class="card" style="width: 18rem;">
+        <img src={{ item.image_url }} alt={{ name }} width="250" height="250" class="card-img-top" alt={{ name }}>
+        <div class="card-body">
+        <h5 class="card-title">{{ item.price }}</h5>
+        <p class="card-text">{{ item.name }}</p>
+        <a href="#" class="btn btn-primary">Ekle</a>
+        </div>
+    </div>
+-->
+{% endfor %}
+</div>
+
+
+
+
+{% endblock %}
