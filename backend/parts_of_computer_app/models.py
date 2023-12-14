@@ -1,6 +1,6 @@
 from django.db import models
 
-# Create your models here.
+# kategori
 class Category(models.Model):
     name = models.CharField(max_length=255)
     
@@ -16,7 +16,6 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
-    
 
 # anakart özellikleri
 class MotherboardFeature(models.Model):
@@ -25,7 +24,7 @@ class MotherboardFeature(models.Model):
     compatible_Processors =models.CharField(max_length=255,null=True)
     motherboard_Size = models.CharField(max_length=255,null=True)
     
-    product = models.OneToOneField(Product, on_delete=models.CASCADE)
+    product = models.OneToOneField(Product, on_delete=models.CASCADE, related_name='MotherboardFeature')
 
     def __str__(self):
         return f"{self.product, self.processor_Socket_Type, self.ram_Type, self.compatible_Processors, self.motherboard_Size}"
@@ -39,7 +38,7 @@ class ComputerCaseFeature(models.Model):
     transparent_Case = models.CharField(max_length=255,null=True)
     type_C = models.CharField(max_length=255,null=True)
 
-    product = models.OneToOneField(Product, on_delete=models.CASCADE)
+    product = models.OneToOneField(Product, on_delete=models.CASCADE, related_name='ComputerCaseFeature')
 
     def __str__(self):
         return f"{self.product}, {self.case_Type}, {self.PSU}, {self.PSU_Location}, {self.transparent_Case}, {self.type_C}"
@@ -52,7 +51,7 @@ class GraphicsCardFeature(models.Model):
     memory_Type = models.CharField(max_length=255,null=True)
     gpu_Memory_Capacity = models.CharField(max_length=255,null=True)
 
-    product = models.OneToOneField(Product, on_delete=models.CASCADE)
+    product = models.OneToOneField(Product, on_delete=models.CASCADE, related_name='GraphicsCardFeature')
 
     def __str__(self):
         return f"{self.product}, {self.gpu_Manufacturer}, {self.gpu_Model}, {self.memory_Type}, {self.gpu_Memory_Capacity}"
@@ -66,7 +65,7 @@ class ProcessorFeature(models.Model):
     processor_Series = models.CharField(max_length=255,null=True)
     core_Count = models.CharField(max_length=255,null=True)
 
-    product = models.OneToOneField(Product, on_delete=models.CASCADE)
+    product = models.OneToOneField(Product, on_delete=models.CASCADE, related_name='ProcessorFeature')
 
     def __str__(self):
         return f"{self.product}, {self.processor_Model}, {self.processor_Manufacturer}, {self.processor_Socket_Type}, {self.processor_Series}, {self.core_Count}"
@@ -80,7 +79,7 @@ class CaseFanFeature(models.Model):
     power_Connector = models.CharField(max_length=255,null=True)
     rpm = models.CharField(max_length=255,null=True)
 
-    product = models.OneToOneField(Product, on_delete=models.CASCADE)
+    product = models.OneToOneField(Product, on_delete=models.CASCADE, related_name='CaseFanFeature')
 
     def __str__(self):
         return f"{self.product}, {self.cooling_Type}, {self.fan_Count}, {self.led_Type}, {self.power_Connector}, {self.rpm}"
@@ -94,7 +93,7 @@ class KeyboardFeature(models.Model):
     wrist_Support = models.BooleanField(null=True)
     numpad = models.BooleanField(null=True)
 
-    product = models.OneToOneField(Product, on_delete=models.CASCADE)
+    product = models.OneToOneField(Product, on_delete=models.CASCADE, related_name='KeyboardFeature')
 
     def __str__(self):
         return f"{self.product}, {self.connection_Type}, {self.mechanical}, {self.keyboard_Layout}, {self.wrist_Support}, {self.numpad}"
@@ -108,7 +107,7 @@ class MonitorFeature(models.Model):
     panel_Type = models.CharField(max_length=255,null=True)
     response_Time = models.CharField(max_length=255,null=True)
 
-    product = models.OneToOneField(Product, on_delete=models.CASCADE)
+    product = models.OneToOneField(Product, on_delete=models.CASCADE, related_name='MonitorFeature')
 
     def __str__(self):
         return f"{self.product}, {self.screen_Size}, {self.resolution}, {self.refresh_Rate}, {self.panel_Type}, {self.response_Time}"
@@ -122,7 +121,7 @@ class MouseFeature(models.Model):
     usage_Type = models.CharField(max_length=255,null=True)
     max_DPI = models.CharField(max_length=255,null=True)
 
-    product = models.OneToOneField(Product, on_delete=models.CASCADE)
+    product = models.OneToOneField(Product, on_delete=models.CASCADE, related_name='MouseFeature')
 
     def __str__(self):
         return f"{self.product}, {self.connection_Type}, {self.tracking_Type}, {self.button_Count}, {self.usage_Type}, {self.max_DPI}"
@@ -136,7 +135,7 @@ class RamFeature(models.Model):
     channel_Type = models.CharField(max_length=255,null=True)
     ram_Compatibility = models.CharField(max_length=255,null=True)
 
-    product = models.OneToOneField(Product, on_delete=models.CASCADE)
+    product = models.OneToOneField(Product, on_delete=models.CASCADE, related_name='RamFeature')
 
     def __str__(self):
         return f"{self.product}, {self.ram_Type}, {self.ram_Capacity}, {self.ram_Frequency}, {self.channel_Type}, {self.ram_Compatibility}"
@@ -150,8 +149,7 @@ class CoolerFeature(models.Model):
     radiator_Size = models.CharField(max_length=255,null=True)
     fan_Count = models.IntegerField(null=True)
 
-    product = models.OneToOneField(Product, on_delete=models.CASCADE)
+    product = models.OneToOneField(Product, on_delete=models.CASCADE, related_name='CoolerFeature')
 
     def __str__(self):
         return f"{self.product}, {self.compatible_Sockets}, {self.led}, {self.radiator_Size}, {self.fan_Count}"
-

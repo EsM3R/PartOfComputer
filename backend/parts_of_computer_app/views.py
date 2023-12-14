@@ -21,70 +21,89 @@ def product(request):
         serializer = ProductSerializer(data, many=True)
         return  Response(serializer.data)
 
+
 @api_view(["GET"])
-def motherboard(request):
+def product_details(request , id):
+    if request.method == "GET":
+        data = Product.objects.filter(id = id )
+        serializer = ProductSerializer(data, many=True)
+        return  Response(serializer.data)
+
+
+
+@api_view(["GET"])
+def category_details(request, id):
+    if request.method == "GET":
+        data = Product.objects.filter(category = id)
+        serializer = ProductSerializer(data, many=True)
+        return  Response(serializer.data)
+
+
+
+@api_view(["GET"])
+def motherboard(request , product):
     if request.method == 'GET':
-        data = MotherboardFeature.objects.all()
+        data = MotherboardFeature.objects.filter(product = product)
         serializer = MotherBoardFeatureSerializer(data, many=True)
         return  Response(serializer.data)
     
     
 @api_view(["GET"])
-def computer_case(request):
+def computer_case(request ,product):
     if request.method == 'GET':
-        data = ComputerCaseFeature.objects.all()
+        data = ComputerCaseFeature.objects.filter(product = product)
         serializer = GraphicsCardFeatureSerializer(data, many=True)
         return  Response(serializer.data)
 
 @api_view(["GET"])
-def  graphics_card(request):
+def  graphics_card(request,product):
     if request.method == 'GET':
-        data = GraphicsCardFeature.objects.all()
+        data = GraphicsCardFeature.objects.filter(product = product)
         serializer = ComputerCaseFeatureSerializer(data, many=True)
         return  Response(serializer.data)
 @api_view(["GET"])  
-def  processor(request):
+def  processor(request,product):
     if request.method == 'GET':
-        data = ProcessorFeature.objects.all()
+        data = ProcessorFeature.objects.filter(product = product)
         serializer = ProcessorFeatureSerializer(data, many=True)
         return  Response(serializer.data)
 
 @api_view(["GET"])
-def case_fan(request):
+def case_fan(request,product):
     if request.method == 'GET':
-        data = CaseFanFeature.objects.all()
+        data = CaseFanFeature.objects.filter(product = product)
         serializer = CaseFanFeatureSerializer(data, many=True)
         return  Response(serializer.data)
 
 @api_view(["GET"])
-def keyboard(request):
+def keyboard(request,product):
     if request.method == 'GET':
-        data = KeyboardFeature.objects.all()
+        data = KeyboardFeature.objects.filter(product = product)
         serializer = KeyboardFeatureSerializer(data, many=True)
         return  Response(serializer.data)
 @api_view(["GET"])
-def monitor(request):
+def monitor(request,product):
     if request.method == 'GET':
-        data = MonitorFeature.objects.all()
+        data = MonitorFeature.objects.filter(product = product)
         serializer = MonitorFeatureSerializer(data, many=True)
         return  Response(serializer.data)
 
 @api_view(["GET"])
-def mouse(request):
+def mouse(request,product):
     if request.method == 'GET':
-        data = MouseFeature.objects.all()
+        data = MouseFeature.objects.filter(product = product)
         serializer = MouseFeatureSerializer(data, many=True)
         return  Response(serializer.data)
 @api_view(["GET"])
-def ram(request):
+def ram(request,product):
     if request.method == 'GET':
-        data = RamFeature.objects.all()
+        data = RamFeature.objects.filter(product = product)
         serializer = RamFeatureSerializer(data, many=True)
         return  Response(serializer.data)
 
 @api_view(["GET"])
-def cooler(request):
+def cooler(request,product):
     if request.method == 'GET':
-        data = CoolerFeature.objects.all()
+        data = CoolerFeature.objects.filter(product = product)
         serializer = CoolerFeatureSerializer(data, many=True)
         return  Response(serializer.data)
